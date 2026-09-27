@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#e3350d" />
+    <title>Pokédex | PokeApp</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+
+  <body>
+    <div class="pokedex-shell">
+      <header class="pokedex-top">
+        <div class="top-left">
+          <div class="pokeball-camera" aria-hidden="true">
+            <span></span>
+          </div>
+
+          <div class="brand">
+            <img src="./assets/img/logo-pokemon.svg" alt="Pokémon" />
+          </div>
+        </div>
+
+        <nav class="header-nav" aria-label="Navegación principal">
+          <a href="#" id="link-pokedex" class="active">Pokédex</a>
+          <a href="#" id="link-login">Iniciar sesión</a>
+          <a href="#" id="link-registro">Registrarse</a>
+          <a href="#" id="link-juego">Batalla</a>
+        </nav>
+
+        <form class="header-search" id="form-busqueda">
+          <label for="busqueda" class="sr-only">Buscar Pokémon</label>
+          <input
+            type="search"
+            id="busqueda"
+            placeholder="Buscar Pokémon..."
+            autocomplete="off"
+          />
+          <button type="submit" aria-label="Buscar Pokémon">⌕</button>
+        </form>
+      </header>
+
+      <div class="pokedex-lights" aria-hidden="true">
+        <span class="light light-red"></span>
+        <span class="light light-yellow"></span>
+        <span class="light light-green"></span>
+      </div>
+
+      <main class="main">
+        <div class="pokedex-display">
+          <div class="display-heading">
+            <div>
+              <p class="eyebrow">REGISTRO POKÉMON</p>
+              <h1>Pokédex</h1>
+            </div>
+            <div class="display-counter">
+              <span>ENTRADAS</span>
+              <strong id="pokemon-count">0</strong>
+            </div>
+          </div>
+
+          <div class="display-line"></div>
+
+          <div id="app"></div>
+        </div>
+      </main>
+
+      <footer class="footer">
+        <div class="footer-status">
+          <span class="status-dot"></span>
+          SISTEMA POKÉDEX ACTIVO
+        </div>
+        <p>PokeApp | Proyecto Educativo | FSD 4to Informático - Valentino Carribale</p>
+      </footer>
+    </div>
+
+    <script type="module" src="./js/app.js"></script>
+  </body>
+</html>
