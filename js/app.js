@@ -1,70 +1,28 @@
 import { pokemones } from "./db/pokemones.js";
 
-const app = document.querySelector("#app");
-const countElement = document.querySelector("#pokemon-count");
+let app = document.querySelector("#app");
 
-app.innerHTML = `
-  <section class="pokedex-section">
-    <div id="pokedex-gallery" class="pokedex-gallery"></div>
-  </section>
-`;
-
-const pokedexGallery = document.querySelector("#pokedex-gallery");
-
-const normalizarTipo = (tipo) => {
-  return tipo
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase()
-    .replace(/[^a-z0-9]/g, "");
-};
-
-const formatearNumero = (id) => {
-  return `N.º ${String(id).padStart(3, "0")}`;
-};
-
-for (const pokemon of pokemones) {
-  const tiposHTML = pokemon.tipo
-    .map((tipo) => {
-      const clase = normalizarTipo(tipo);
-
-      return `
-        <span class="type type-${clase}">
-          ${tipo}
-        </span>
-      `;
-    })
-    .join("");
-
-  pokedexGallery.innerHTML += `
+function crearTarjeta(nombre, imagen, id, tipo, rareza) {
+  return `
     <article class="pokemon-card">
       <div class="pokemon-image">
-        <img
-          src="${pokemon.imagen}"
-          alt="${pokemon.nombre}"
-          loading="lazy"
-        />
+        <img src="${imagen}" alt="${nombre}" />
       </div>
 
       <div class="pokemon-info">
-        <span class="pokemon-id">
-          ${formatearNumero(pokemon.id)}
-        </span>
+        <span class="pokemon-id">N.º 0${id}</span>
 
-        <h2>${pokemon.nombre}</h2>
+        <h2>${nombre}</h2>
 
         <div class="pokemon-types">
-          ${tiposHTML}
+          <span class="type type-${tipo.toLowerCase()}">
+            ${tipo}
+          </span>
         </div>
 
-        <p class="pokemon-rareza">
-          ${pokemon.rareza}
-        </p>
+        <p class="pokemon-rareza">${rareza}</p>
 
-        <button
-          class="btn-detalle"
-          data-id="${pokemon.id}"
-        >
+        <button class="btn-detalle" data-id="${id}">
           Ver detalles
         </button>
       </div>
@@ -72,6 +30,85 @@ for (const pokemon of pokemones) {
   `;
 }
 
-if (countElement) {
-  countElement.textContent = String(pokemones.length).padStart(2, "0");
+function crearPantalla(titulo, mensaje) {
+  return `
+    <section class="pantalla">
+      <h2>${titulo}</h2>
+      <p>${mensaje}</p>
+    </section>
+  `;
 }
+
+function mostrarBienvenida() {
+  app.innerHTML = `
+    <section class="pantalla">
+      <h2>¡Bienvenido a PokeApp!</h2>
+      <p>Usá el menú para comenzar.</p>
+    </section>
+  `;
+}
+
+function mostrarPokedex() {
+  app.innerHTML = '<section class="pokedex-section"></section>';
+
+  let pokedexSection = document.querySelector(".pokedex-section");
+
+  pokedexSection.innerHTML =
+    '<div id="pokedex-gallery" class="pokedex-gallery"></div>';
+
+  let pokedexGallery = document.querySelector("#pokedex-gallery");
+
+  for (let pokemon of pokemones) {
+    console.log(pokemon.nombre);
+    console.log(pokemon.imagen);
+
+    pokedexGallery.innerHTML += crearTarjeta(
+      pokemon.nombre,
+      pokemon.imagen,
+      pokemon.id,
+      pokemon.tipo[0],
+      pokemon.rareza
+    );
+  }
+
+  return false;
+}
+
+function mostrarLogin() {
+  app.innerHTML = crearPantalla(
+    "Iniciar sesión",
+    "Esta sección estará disponible próximamente."
+  );
+
+  return false;
+}
+
+function mostrarRegistro() {
+  app.innerHTML = crearPantalla(
+    "Registrarse",
+    "Esta sección estará disponible próximamente."
+  );
+
+  return false;
+}
+
+function mostrarBatalla() {
+  app.innerHTML = crearPantalla(
+    "Batalla",
+    "Esta sección estará disponible próximamente."
+  );
+
+  return false;
+}
+
+let linkPokedex = document.querySelector("#link-pokedex");
+let linkLogin = document.querySelector("#link-login");
+let linkRegistro = document.querySelector("#link-registro");
+let linkJuego = document.querySelector("#link-juego");
+
+linkPokedex.onclick = mostrarPokedex;
+linkLogin.onclick = mostrarLogin;
+linkRegistro.onclick = mostrarRegistro;
+linkJuego.onclick = mostrarBatalla;
+
+mostrarBienvenida();

@@ -1,9 +1,3 @@
-/* =========================================================
-   POKEAPP — POKÉDEX UI
-   Inspired by the classic Pokédex: red shell, blue screen,
-   rounded hardware, status lights and compact data panels.
-========================================================= */
-
 * {
   margin: 0;
   padding: 0;
@@ -43,23 +37,7 @@ body {
 }
 
 /* =========================================================
-   ACCESSIBILITY
-========================================================= */
-
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-/* =========================================================
-   MAIN POKÉDEX BODY
+   CUERPO PRINCIPAL
 ========================================================= */
 
 .pokedex-shell {
@@ -73,7 +51,7 @@ body {
 }
 
 /* =========================================================
-   HEADER / TOP HARDWARE
+   ENCABEZADO
 ========================================================= */
 
 .pokedex-top {
@@ -118,8 +96,6 @@ body {
 
 .brand {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
 }
 
 .brand img {
@@ -160,44 +136,8 @@ body {
   box-shadow: inset 0 -3px 0 rgba(255,255,255,.25);
 }
 
-.header-search {
-  display: flex;
-  align-items: center;
-  width: 255px;
-  overflow: hidden;
-  background: white;
-  border: 4px solid var(--pokedex-dark);
-  border-radius: 9px;
-  box-shadow: 0 4px 0 rgba(0,0,0,.25);
-}
-
-.header-search input {
-  min-width: 0;
-  width: 100%;
-  border: 0;
-  outline: 0;
-  padding: 11px 13px;
-  color: var(--text);
-  background: white;
-  font: 600 .9rem "Inter", sans-serif;
-}
-
-.header-search input::placeholder {
-  color: #89949a;
-}
-
-.header-search button {
-  width: 46px;
-  height: 43px;
-  border: 0;
-  color: white;
-  background: var(--pokedex-dark);
-  font-size: 1.6rem;
-  cursor: pointer;
-}
-
 /* =========================================================
-   CLASSIC POKÉDEX LIGHTS
+   LUCES DE ESTADO
 ========================================================= */
 
 .pokedex-lights {
@@ -222,7 +162,7 @@ body {
 .light-green { background: var(--green); }
 
 /* =========================================================
-   SCREEN
+   PANTALLA
 ========================================================= */
 
 .main {
@@ -248,8 +188,6 @@ body {
 .display-heading {
   display: flex;
   align-items: end;
-  justify-content: space-between;
-  gap: 20px;
 }
 
 .eyebrow {
@@ -266,31 +204,6 @@ body {
   color: var(--pokedex-black);
 }
 
-.display-counter {
-  min-width: 115px;
-  padding: 10px 14px;
-  text-align: center;
-  border: 3px solid var(--screen-blue-dark);
-  border-radius: 8px;
-  background: #b9ecfa;
-  box-shadow: inset 0 2px 8px rgba(0,0,0,.08);
-}
-
-.display-counter span {
-  display: block;
-  color: var(--screen-blue-dark);
-  font-size: .58rem;
-  font-weight: 900;
-  letter-spacing: 1px;
-}
-
-.display-counter strong {
-  display: block;
-  margin-top: 2px;
-  font-family: "Press Start 2P", monospace;
-  font-size: 1.05rem;
-}
-
 .display-line {
   height: 4px;
   margin: 22px 0 25px;
@@ -300,7 +213,7 @@ body {
 }
 
 /* =========================================================
-   GALLERY
+   GALERÍA
 ========================================================= */
 
 .pokedex-gallery {
@@ -310,7 +223,7 @@ body {
 }
 
 /* =========================================================
-   POKÉMON CARD
+   CARTAS
 ========================================================= */
 
 .pokemon-card {
@@ -342,7 +255,7 @@ body {
 }
 
 /* =========================================================
-   IMAGE PANEL
+   PANEL DE IMAGEN
 ========================================================= */
 
 .pokemon-image {
@@ -386,7 +299,7 @@ body {
 }
 
 /* =========================================================
-   INFORMATION
+   INFORMACIÓN
 ========================================================= */
 
 .pokemon-info {
@@ -410,7 +323,7 @@ body {
 }
 
 /* =========================================================
-   TYPES — SUPPORTS ONE OR TWO TYPES
+   TIPOS
 ========================================================= */
 
 .pokemon-types {
@@ -441,19 +354,19 @@ body {
 .type-veneno { background: #aa5da1; }
 .type-fuego { background: #f08030; }
 .type-agua { background: #6890f0; }
-.type-electrico { background: #f8d030; color: #282000; text-shadow: none; }
+.type-eléctrico { background: #f8d030; color: #282000; text-shadow: none; }
 .type-tierra { background: #c8a04b; }
 .type-normal { background: #a8a878; }
-.type-psiquico { background: #f85888; }
+.type-psíquico { background: #f85888; }
 .type-volador { background: #a890f0; }
 .type-fantasma { background: #705898; }
-.type-dragon { background: #7038f8; }
+.type-dragón { background: #7038f8; }
 .type-lucha { background: #c03028; }
 .type-acero { background: #b8b8d0; color: #25252b; text-shadow: none; }
 .type-siniestro { background: #705848; }
 
 /* =========================================================
-   EXTRA INFO
+   INFORMACIÓN EXTRA
 ========================================================= */
 
 .pokemon-rareza {
@@ -489,7 +402,7 @@ body {
 }
 
 /* =========================================================
-   FOOTER
+   PIE DE PÁGINA
 ========================================================= */
 
 .footer {
@@ -559,10 +472,6 @@ body {
     grid-row: auto;
   }
 
-  .header-search {
-    width: min(100%, 360px);
-  }
-
   .pokedex-gallery {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -610,10 +519,6 @@ body {
   .display-heading {
     align-items: flex-start;
     flex-direction: column;
-  }
-
-  .display-counter {
-    width: 100%;
   }
 
   .footer {
