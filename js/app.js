@@ -1,4 +1,5 @@
 import { pokemones } from "./db/pokemones.js";
+import { usuarios } from "./db/usuarios.js";
 
 let app = document.querySelector("#app");
 
@@ -75,6 +76,7 @@ function mostrarLogin() {
       <input 
         type="text" 
         id="username"
+        required
       />
 
       <label for="password">
@@ -84,6 +86,7 @@ function mostrarLogin() {
       <input 
         type="password" 
         id="password"
+        required
       />
 
       <button type="submit">
@@ -181,6 +184,31 @@ linkPokedex.addEventListener("click", (event)=>{
 linkLogin.addEventListener("click", (event)=>{
   event.preventDefault();
   mostrarLogin()
+
+  const formularioLogin = document.querySelector("#form-login");
+  
+  formularioLogin.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const username = document.querySelector("#username").value;
+    const password = document.querySelector("#password").value;
+    let encontrado = false;
+
+    for (let usuario of usuarios) {
+      if (usuario.usuario === username && usuario.password === password) {
+        alert("Inicio de sesión exitoso. Bienvenido " + usuario.usuario);
+        encontrado = true;
+        break;
+
+      } else {
+        encontrado = false;
+      }
+    }
+
+    if (!encontrado) {
+      alert("Usuario o contraseña incorrectos");
+    }
+
+    });
 });
 
 linkRegistro.addEventListener("click", (event)=>{
