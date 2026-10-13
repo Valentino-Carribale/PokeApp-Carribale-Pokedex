@@ -350,20 +350,20 @@ body {
 
 /* Tipos oficiales / estilo Pokédex */
 
-.type-planta { background: #63bc5a; }
-.type-veneno { background: #aa5da1; }
-.type-fuego { background: #f08030; }
-.type-agua { background: #6890f0; }
-.type-eléctrico { background: #f8d030; color: #282000; text-shadow: none; }
-.type-tierra { background: #c8a04b; }
-.type-normal { background: #a8a878; }
-.type-psíquico { background: #f85888; }
-.type-volador { background: #a890f0; }
-.type-fantasma { background: #705898; }
-.type-dragón { background: #7038f8; }
-.type-lucha { background: #c03028; }
-.type-acero { background: #b8b8d0; color: #25252b; text-shadow: none; }
-.type-siniestro { background: #705848; }
+.type-Planta { background: #63bc5a; }
+.type-Veneno { background: #aa5da1; }
+.type-Fuego { background: #f08030; }
+.type-Agua { background: #6890f0; }
+.type-Eléctrico { background: #f8d030; color: #282000; text-shadow: none; }
+.type-Tierra { background: #c8a04b; }
+.type-Normal { background: #a8a878; }
+.type-Psíquico { background: #f85888; }
+.type-Volador { background: #a890f0; }
+.type-Fantasma { background: #705898; }
+.type-Dragón { background: #7038f8; }
+.type-Lucha { background: #c03028; }
+.type-Acero { background: #b8b8d0; color: #25252b; text-shadow: none; }
+.type-Siniestro { background: #705848; }
 
 /* =========================================================
    INFORMACIÓN EXTRA

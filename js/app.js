@@ -15,9 +15,9 @@ function crearTarjeta(nombre, imagen, id, tipo, rareza) {
         <h2>${nombre}</h2>
 
         <div class="pokemon-types">
-          <span class="type type-${tipo.toLowerCase()}">
-            ${tipo}
-          </span>
+          ${tipo.map(tmap => `
+          <span class="type type-${tmap}">${tmap}</span>
+          `).join("")}
         </div>
 
         <p class="pokemon-rareza">${rareza}</p>
@@ -27,24 +27,6 @@ function crearTarjeta(nombre, imagen, id, tipo, rareza) {
         </button>
       </div>
     </article>
-  `;
-}
-
-function crearPantalla(titulo, mensaje) {
-  return `
-    <section class="pantalla">
-      <h2>${titulo}</h2>
-      <p>${mensaje}</p>
-    </section>
-  `;
-}
-
-function mostrarBienvenida() {
-  app.innerHTML = `
-    <section class="pantalla">
-      <h2>¡Bienvenido a PokeApp!</h2>
-      <p>Usá el menú para comenzar.</p>
-    </section>
   `;
 }
 
@@ -59,46 +41,131 @@ function mostrarPokedex() {
   let pokedexGallery = document.querySelector("#pokedex-gallery");
 
   for (let pokemon of pokemones) {
-    console.log(pokemon.nombre);
-    console.log(pokemon.imagen);
-
     pokedexGallery.innerHTML += crearTarjeta(
       pokemon.nombre,
       pokemon.imagen,
       pokemon.id,
-      pokemon.tipo[0],
+      pokemon.tipo,
       pokemon.rareza
     );
   }
+}
 
-  return false;
+function mostrarBienvenida() {
+  app.innerHTML = `
+    <section class="pantalla">
+      <h2>¡Bienvenido a PokeApp!</h2>
+      <p>Usá el menú para comenzar.</p>
+    </section>
+  `;
 }
 
 function mostrarLogin() {
-  app.innerHTML = crearPantalla(
-    "Iniciar sesión",
-    "Esta sección estará disponible próximamente."
-  );
+  app.innerHTML = `
+  <section class="login-section">
 
-  return false;
+    <h1>Iniciar sesión</h1>
+
+    <form id="form-login">
+
+      <label for="username">
+        Usuario
+      </label>
+
+      <input 
+        type="text" 
+        id="username"
+      />
+
+      <label for="password">
+        Contraseña
+      </label>
+
+      <input 
+        type="password" 
+        id="password"
+      />
+
+      <button type="submit">
+        Ingresar
+      </button>
+
+    </form>
+
+  </section>
+`;
 }
 
 function mostrarRegistro() {
-  app.innerHTML = crearPantalla(
-    "Registrarse",
-    "Esta sección estará disponible próximamente."
-  );
+  app.innerHTML = `
+  <section class="registro-section">
 
-  return false;
+    <h1>Registrarse</h1>
+
+    <form id="form-registro">
+
+      <label for="nombre">
+        Nombre
+      </label>
+
+      <input 
+        type="text" 
+        id="nombre"
+      />
+
+      <label for="email">
+        Email
+      </label>
+
+      <input 
+        type="email" 
+        id="email"
+      />
+
+      <label for="nuevo-username">
+        Usuario
+      </label>
+
+      <input 
+        type="text" 
+        id="nuevo-username"
+      />
+
+      <label for="nueva-password">
+        Contraseña
+      </label>
+
+      <input 
+        type="password" 
+        id="nueva-password"
+      />
+
+      <button type="submit">
+        Registrarse
+      </button>
+
+    </form>
+
+  </section>
+`;
 }
 
 function mostrarBatalla() {
-  app.innerHTML = crearPantalla(
-    "Batalla",
-    "Esta sección estará disponible próximamente."
-  );
+  app.innerHTML = `
+  <section class="batalla-section">
 
-  return false;
+    <h1>Batalla Pokémon</h1>
+
+    <p>
+      Elegí tu Pokémon para comenzar.
+    </p>
+
+    <button id="btn-comenzar-batalla">
+      Comenzar batalla
+    </button>
+
+  </section>
+`;
 }
 
 let linkPokedex = document.querySelector("#link-pokedex");
@@ -106,9 +173,24 @@ let linkLogin = document.querySelector("#link-login");
 let linkRegistro = document.querySelector("#link-registro");
 let linkJuego = document.querySelector("#link-juego");
 
-linkPokedex.onclick = mostrarPokedex;
-linkLogin.onclick = mostrarLogin;
-linkRegistro.onclick = mostrarRegistro;
-linkJuego.onclick = mostrarBatalla;
+linkPokedex.addEventListener("click", (event)=>{
+  event.preventDefault();
+  mostrarPokedex()
+});
+
+linkLogin.addEventListener("click", (event)=>{
+  event.preventDefault();
+  mostrarLogin()
+});
+
+linkRegistro.addEventListener("click", (event)=>{
+  event.preventDefault();
+  mostrarRegistro()
+});
+
+linkJuego.addEventListener("click", (event)=>{
+  event.preventDefault();
+  mostrarBatalla()
+});
 
 mostrarBienvenida();
