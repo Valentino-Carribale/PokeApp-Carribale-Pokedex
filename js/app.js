@@ -70,7 +70,7 @@ function mostrarLogin() {
     <form id="form-login">
 
       <label for="username">
-        Usuario
+        Usuario/Correo Electrónico
       </label>
 
       <input 
@@ -126,7 +126,7 @@ function mostrarRegistro() {
       />
 
       <label for="nuevo-username">
-        Usuario
+        Usuario/Correo Electrónico
       </label>
 
       <input 
@@ -176,14 +176,24 @@ let linkLogin = document.querySelector("#link-login");
 let linkRegistro = document.querySelector("#link-registro");
 let linkJuego = document.querySelector("#link-juego");
 
+function marcarActivo(linkActivo) {
+  [linkPokedex, linkLogin, linkRegistro, linkJuego].forEach(link => {
+    link.classList.remove("active");
+  });
+
+  linkActivo.classList.add("active");
+}
+
 linkPokedex.addEventListener("click", (event)=>{
   event.preventDefault();
   mostrarPokedex()
+  marcarActivo(linkPokedex);
 });
 
 linkLogin.addEventListener("click", (event)=>{
   event.preventDefault();
   mostrarLogin()
+  marcarActivo(linkLogin);
 
   const formularioLogin = document.querySelector("#form-login");
   
@@ -192,10 +202,10 @@ linkLogin.addEventListener("click", (event)=>{
     const username = document.querySelector("#username").value;
     const password = document.querySelector("#password").value;
     let encontrado = false;
-
+    
     for (let usuario of usuarios) {
-      if (usuario.usuario === username && usuario.password === password) {
-        alert("Inicio de sesión exitoso. Bienvenido " + usuario.usuario);
+      if ((usuario.usuario === username || usuario.email === username) && usuario.password === password) {
+        alert("Inicio de sesión exitoso. Bienvenido " + usuario.nombre);
         encontrado = true;
         break;
 
@@ -205,7 +215,7 @@ linkLogin.addEventListener("click", (event)=>{
     }
 
     if (!encontrado) {
-      alert("Usuario o contraseña incorrectos");
+      alert("Usuario, correo o contraseña incorrectos");
     }
 
     });
@@ -214,11 +224,13 @@ linkLogin.addEventListener("click", (event)=>{
 linkRegistro.addEventListener("click", (event)=>{
   event.preventDefault();
   mostrarRegistro()
+  marcarActivo(linkRegistro);
 });
 
 linkJuego.addEventListener("click", (event)=>{
   event.preventDefault();
   mostrarBatalla()
+  marcarActivo(linkJuego);
 });
 
 mostrarBienvenida();
