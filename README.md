@@ -1,6 +1,6 @@
 # PokeApp - Pokédex de Valentino Carribale
 
-Proyecto educativo de Funcionamiento de Sistemas Digitales, desarrollado con HTML, CSS y JavaScript. Conserva el diseño original de Carribale y adapta la lógica de formularios y persistencia de PokeApp-ejemplo.
+Proyecto educativo de Funcionamiento de Sistemas Digitales, desarrollado con HTML, CSS y JavaScript.
 
 ## Cómo abrirlo
 
@@ -36,8 +36,16 @@ Los nuevos registros siempre tienen `admin: false`. El permiso no se puede cambi
 - Administración: carga y edición de todos los campos de los Pokémon, incluidos los iniciales.
 - Control de número/nombre de Pokémon repetidos, tipos diferentes y campos numéricos positivos.
 - Persistencia de usuarios, Pokémon y sesión al recargar o volver a abrir el navegador.
+- Batalla "guionada" entre Greninja y Garchomp, con decisiones preproducidas.
 
-**Batalla:** conserva el molde original, incluido el botón «Comenzar batalla». Su funcionalidad queda pendiente.
+## Extra
+
+Decidí añadir algunas funcionalidades que me parecían importantes para el proyecto.
+
+- Edición de pokemones ya existentes, buscándolos por su id para cambiar sus características.
+- Edición de perfil, permitiendo cambiar datos ya existentes e incluso el avatar de la lista (pequeña DB avatares.js).
+
+**Declaración de IA:** Esta parte, aunque utiliza conocimientos JS ya vistos, fue creada con ayuda de ChatGPT. Consideré que podían quedar bien pero al ser funciones no requeridas, y no saber como se editaban datos ya existentes en la base de datos, me ayudé de la herramienta. Fuera de esto, las lógicas se fueron haciendo sincrónica/asincrónicamente en las clases, y la batalla toma técnicas ya utilizadas en AURORA: The Truth (proyecto final). De todas formas, no son más que funciones, condicionales, local storage, etc. Que puedo entender y defender.
 
 ## Cómo administrar los Pokémon
 

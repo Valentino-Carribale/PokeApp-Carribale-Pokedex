@@ -640,3 +640,172 @@ body {
   .detail-info h2 { font-size: 1.65rem; }
   .detail-data { gap: 16px 10px; }
 }
+
+/* =========================================================
+   BATALLA GUIONADA: GRENINJA VS. GARCHOMP
+========================================================= */
+
+.battle-screen {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.battle-heading {
+  margin-bottom: 20px;
+}
+
+.battle-heading h2 {
+  line-height: 1.35;
+}
+
+/* Zona visual donde aparecen los dos Pokémon. */
+
+.battle-arena {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 18px;
+  padding: 24px;
+  border: 4px solid var(--pokedex-dark);
+  border-radius: 14px;
+  background: linear-gradient(
+    155deg,
+    #bceef9,
+    #8bd7ef 55%,
+    #c6dfbd
+  );
+  box-shadow: 0 5px 0 #6d777b;
+}
+
+.battle-fighter {
+  min-width: 0;
+  text-align: center;
+}
+
+.battle-owner {
+  color: #234b5d;
+  font-size: .7rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+#app .battle-fighter h3 {
+  margin: 5px 0 12px;
+  font-size: 1.35rem;
+}
+
+.battle-fighter img {
+  display: block;
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  filter: drop-shadow(0 9px 4px rgba(20, 60, 75, .2));
+}
+
+.battle-state {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 5px 12px;
+  border: 2px solid #507b8b;
+  border-radius: 6px;
+  background: var(--screen-white);
+  font-size: .82rem;
+  font-weight: 800;
+}
+
+.battle-versus {
+  color: var(--pokedex-red-dark);
+  font-weight: 900;
+  font-size: 1.6rem;
+}
+
+/* Panel que contiene la narración y las decisiones. */
+
+.battle-story {
+  margin-top: 24px;
+  padding: 24px;
+  border: 3px solid var(--pokedex-dark);
+  border-radius: 14px;
+  background: var(--screen-white);
+}
+
+#texto-batalla p + p {
+  margin-top: 12px;
+}
+
+.battle-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.battle-options .btn-primary {
+  min-height: 52px;
+}
+
+.battle-inicio .battle-options {
+  grid-template-columns: 1fr;
+}
+
+/* Diferenciamos visualmente los finales. */
+
+.battle-victoria .battle-heading h2 {
+  color: #1b662f;
+}
+
+.battle-victoria .battle-arena {
+  border-color: #286e40;
+}
+
+.battle-derrota .battle-heading h2 {
+  color: var(--pokedex-red-dark);
+}
+
+.battle-derrota .battle-arena {
+  border-color: var(--pokedex-red-dark);
+}
+
+/* El Pokémon debilitado se muestra con menor opacidad. */
+
+.battle-victoria .battle-rival img,
+.battle-derrota .battle-fighter:not(.battle-rival) img {
+  opacity: .6;
+}
+
+/* Adaptación a pantallas pequeñas. */
+
+@media (max-width: 560px) {
+  .battle-arena {
+    padding: 16px 8px;
+    gap: 6px;
+  }
+
+  #app .battle-fighter h3 {
+    font-size: 1rem;
+  }
+
+  .battle-fighter img {
+    height: 125px;
+  }
+
+  .battle-owner {
+    font-size: .6rem;
+  }
+
+  .battle-state {
+    padding: 4px 6px;
+    font-size: .7rem;
+  }
+
+  .battle-versus {
+    font-size: 1rem;
+  }
+
+  .battle-story {
+    padding: 18px 14px;
+  }
+
+  .battle-options {
+    grid-template-columns: 1fr;
+  }
+}

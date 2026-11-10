@@ -14,6 +14,9 @@ import {
 // Importamos los nombres de los avatares disponibles.
 import { avatares } from "./db/avatares.js";
 
+// Importamos los datos de la batalla.
+import { escenasBatalla } from "./db/game.js";
+
 // ==========================================================
 // REFERENCIAS A LOS ELEMENTOS FIJOS DEL HTML
 // ==========================================================
@@ -2044,29 +2047,145 @@ function guardarFormularioPokemon(idOriginal) {
 }
 
 // ==========================================================
-// 27. MOSTRAR EL MOLDE DE BATALLA
+// BATALLA: ESCENAS Y DECISIONES, COMO EN AURORA
 // ==========================================================
 
+// Entrar desde el menú siempre muestra la presentación.
 function mostrarBatalla() {
   cambiarPantalla("Batalla", linkJuego);
+  mostrarEscenaBatalla("inicio");
+}
 
-  // Solo se muestra la estructura original.
-  // El botón todavía no tiene lógica de combate.
-  app.innerHTML = `
-  <section class="batalla-section">
+// Recibe el ID de una escena y busca su objeto en game.js.
+function mostrarEscenaBatalla(id) {
+  for (let escena of escenasBatalla) {
+    if (escena.id === id) {
+      // Primero creamos la pantalla.
+      //
+      // Dejamos espacios vacíos para insertar después
+      // los párrafos y las opciones de esta escena.
+      //
+      // escena.tipo permite aplicar estilos distintos
+      // a la presentación, las decisiones y los finales.
+      app.innerHTML = `
+        <section class="batalla-section battle-screen battle-${escena.tipo}">
+          <div class="battle-heading">
+            <p class="eyebrow">
+              BATALLA GUIONADA · ${escena.etiqueta}
+            </p>
 
-    <h1>Batalla Pokémon</h1>
+            <h2 id="titulo-batalla" tabindex="-1">
+              ${escena.titulo}
+            </h2>
+          </div>
 
-    <p>
-      Elegí tu Pokémon para comenzar.
-    </p>
+          <div
+            class="battle-arena"
+            aria-label="Greninja contra Garchomp"
+          >
+            <article class="battle-fighter">
+              <p class="battle-owner">TU POKÉMON</p>
 
-    <button id="btn-comenzar-batalla">
-      Comenzar batalla
-    </button>
+              <h3>Greninja</h3>
 
-  </section>
-`;
+              <img
+                src="./assets/img/greninja.png"
+                alt="Greninja, tu Pokémon"
+              />
+
+              <p class="battle-state">
+                ${escena.estadoGreninja}
+              </p>
+            </article>
+
+            <span class="battle-versus" aria-hidden="true">
+              VS
+            </span>
+
+            <article class="battle-fighter battle-rival">
+              <p class="battle-owner">RIVAL</p>
+
+              <h3>Garchomp</h3>
+
+              <img
+                src="./assets/img/garchomp.png"
+                alt="Garchomp, tu rival"
+              />
+
+              <p class="battle-state">
+                ${escena.estadoGarchomp}
+              </p>
+            </article>
+          </div>
+
+          <div class="battle-story">
+            <div
+              id="texto-batalla"
+              aria-live="polite"
+            ></div>
+
+            <h3>${escena.pregunta}</h3>
+
+            <div
+              id="opciones-batalla"
+              class="battle-options"
+            ></div>
+          </div>
+        </section>
+      `;
+
+      // Recorremos los textos de la escena y agregamos
+      // un párrafo por cada elemento del array.
+      const narracion = document.querySelector("#texto-batalla");
+
+      for (let parrafo of escena.textos) {
+        narracion.innerHTML += `<p>${parrafo}</p>`;
+      }
+
+      // Creamos un botón por cada opción disponible.
+      const opciones = document.querySelector("#opciones-batalla");
+
+      for (let opcion of escena.opciones) {
+        opciones.innerHTML += `
+          <button
+            type="button"
+            id="${opcion.id}"
+            class="btn-primary"
+          >
+            ${opcion.texto}
+          </button>
+        `;
+      }
+
+      // Asignamos los eventos DESPUÉS de crear todos los botones.
+      //
+      // Cada opción recuerda su destino:
+      // otra escena o la salida a la Pokédex.
+      for (let opcion of escena.opciones) {
+        document.querySelector("#" + opcion.id).addEventListener(
+          "click",
+          function () {
+            if (opcion.destino === "pokedex") {
+              mostrarPokedex();
+            } else {
+              mostrarEscenaBatalla(opcion.destino);
+            }
+          }
+        );
+      }
+
+      // Llevamos el foco al título nuevo para facilitar
+      // el seguimiento de las escenas usando el teclado.
+      document.querySelector("#titulo-batalla").focus();
+
+      // Ya encontramos y mostramos la escena.
+      // Terminamos la función para no seguir recorriendo.
+      return;
+    }
+  }
+
+  // Si se indicó un ID inexistente, volvemos a la presentación.
+  mostrarBatalla();
 }
 
 // ==========================================================
