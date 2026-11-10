@@ -2,6 +2,7 @@ export const pokemones = [
   {
     id: 3,
     nombre: "Venusaur",
+    descripcion: "La gran flor de su espalda aprovecha la luz del sol. Es un Pokémon de tipo Planta y Veneno y la evolución de Ivysaur.",
     tipo: ["Planta", "Veneno"],
     altura: 2.0,
     peso: 100.0,
@@ -24,6 +25,7 @@ export const pokemones = [
   {
     id: 6,
     nombre: "Charizard",
+    descripcion: "Este Pokémon de tipo Fuego y Volador surca el cielo con sus grandes alas. En la punta de su cola arde una llama.",
     tipo: ["Fuego", "Volador"],
     altura: 1.7,
     peso: 90.5,
@@ -46,6 +48,7 @@ export const pokemones = [
   {
     id: 25,
     nombre: "Pikachu",
+    descripcion: "Almacena electricidad en las bolsas de sus mejillas. Puede evolucionar a Raichu mediante una Piedra Trueno.",
     tipo: ["Eléctrico"],
     altura: 0.4,
     peso: 6.0,
@@ -68,6 +71,7 @@ export const pokemones = [
   {
     id: 94,
     nombre: "Gengar",
+    descripcion: "Un Pokémon de tipo Fantasma y Veneno que se oculta entre las sombras. Su sonrisa es una de sus características más reconocibles.",
     tipo: ["Fantasma", "Veneno"],
     altura: 1.5,
     peso: 40.5,
@@ -90,6 +94,7 @@ export const pokemones = [
   {
     id: 149,
     nombre: "Dragonite",
+    descripcion: "Este Pokémon de tipo Dragón y Volador tiene grandes alas y una apariencia amistosa. Es la evolución de Dragonair.",
     tipo: ["Dragón", "Volador"],
     altura: 2.2,
     peso: 210.0,
@@ -112,6 +117,7 @@ export const pokemones = [
   {
     id: 448,
     nombre: "Lucario",
+    descripcion: "Un Pokémon de tipo Lucha y Acero que percibe el aura de los seres vivos. Es la evolución de Riolu.",
     tipo: ["Lucha", "Acero"],
     altura: 1.2,
     peso: 54.0,
@@ -134,6 +140,7 @@ export const pokemones = [
   {
     id: 658,
     nombre: "Greninja",
+    descripcion: "Este Pokémon de tipo Agua y Siniestro se mueve con la agilidad de un ninja. Lleva su larga lengua alrededor del cuello.",
     tipo: ["Agua", "Siniestro"],
     altura: 1.5,
     peso: 40.0,
@@ -156,6 +163,7 @@ export const pokemones = [
   {
     id: 445,
     nombre: "Garchomp",
+    descripcion: "Un Pokémon de tipo Dragón y Tierra con aletas y fuertes garras. Es la evolución de Gabite.",
     tipo: ["Dragón", "Tierra"],
     altura: 1.9,
     peso: 95.0,
@@ -178,6 +186,7 @@ export const pokemones = [
   {
     id: 150,
     nombre: "Mewtwo",
+    descripcion: "Un Pokémon legendario de tipo Psíquico creado a partir de experimentos genéticos. Se destaca por sus poderes mentales.",
     tipo: ["Psíquico"],
     altura: 2.0,
     peso: 122.0,
@@ -200,6 +209,7 @@ export const pokemones = [
   {
     id: 384,
     nombre: "Rayquaza",
+    descripcion: "Este Pokémon legendario de tipo Dragón y Volador habita en las alturas. Su largo cuerpo verde le permite desplazarse por el cielo.",
     tipo: ["Dragón", "Volador"],
     altura: 7.0,
     peso: 206.5,

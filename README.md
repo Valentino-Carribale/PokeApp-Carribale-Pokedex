@@ -1,370 +1,111 @@
-# 🔴 PokeApp - Pokédex
+# PokeApp - Pokédex de Valentino Carribale
 
-Aplicación web educativa inspirada en una **Pokédex de Pokémon**,
-desarrollada con **HTML, CSS y JavaScript**.
+Proyecto educativo de Funcionamiento de Sistemas Digitales, desarrollado con HTML, CSS y JavaScript. Conserva el diseño original de Carribale y adapta la lógica de formularios y persistencia de PokeApp-ejemplo.
 
-El proyecto presenta información de diferentes Pokémon mediante una
-interfaz visual inspirada en el dispositivo Pokédex, con tarjetas,
-tipos, número de Pokédex, rareza e imágenes.
+## Cómo abrirlo
 
-> **PokeApp-Carribale-Pokedex**
+1. Descomprimir el ZIP completo.
+2. Abrir la carpeta `PokeApp-Carribale-Pokedex` en Visual Studio Code.
+3. Abrir `index.html` con la extensión **Live Server**.
+4. Mantener el mismo servidor, dirección y puerto para recuperar los datos guardados.
 
-------------------------------------------------------------------------
+El proyecto usa módulos (`import` y `export`), por eso debe ejecutarse con un servidor local y no haciendo doble clic en `index.html`.
 
-## 📖 Descripción
+## Cuentas de prueba
 
-**PokeApp** es una aplicación web que permite visualizar una colección
-de Pokémon desde una base de datos local escrita en JavaScript.
+Se puede ingresar por nombre de usuario o por correo.
 
-La interfaz busca combinar:
+| Rol | Usuario | Correo | Contraseña |
+| --- | --- | --- | --- |
+| Administrador | mateog_24 | mateo.gomez@gmail.com | M4teo#8291 |
+| Usuario común | sofi_ram | sofia.ramirez@gmail.com | S0fia!4726 |
 
--   🎮 Estética inspirada en Pokémon.
--   📱 Diseño responsive.
--   🧩 Componentes reutilizables mediante HTML y CSS.
--   ⚡ JavaScript modular.
--   🗃️ Datos almacenados en archivos de base de datos de JavaScript.
--   🖼️ Imágenes y sonidos asociados a los Pokémon.
--   👤 Una base de datos local de usuarios y avatares.
+Los nuevos registros siempre tienen `admin: false`. El permiso no se puede cambiar desde el perfil, solo desde DB.
 
-------------------------------------------------------------------------
+## Funcionalidades
 
-## ✨ Características
+- Inicio de sesión con usuario o correo y contraseña.
+- Bienvenida personalizada con avatar, nombre, apellido, usuario, correo y rol.
+- Menú con acceso al perfil, cierre de sesión y administración según el rol.
+- Registro con avatar, validación de datos, contraseñas coincidentes y control de correo/usuario repetido.
+- Edición de avatar, nombre, apellido y correo.
+- Cambio de contraseña: requiere la contraseña actual correcta y repetir la nueva. Si se dejan los tres campos vacíos, se conserva la contraseña.
+- Pokédex con todos los registros actuales y contador de entradas.
+- Botón **Ver detalles**: lee la descripción, tipos, medidas, generación, habilidad, evolución, rareza y estadísticas del Pokémon seleccionado.
+- Sonido mediante el control de audio y alternancia entre la imagen normal y shiny.
+- Administración: carga y edición de todos los campos de los Pokémon, incluidos los iniciales.
+- Control de número/nombre de Pokémon repetidos, tipos diferentes y campos numéricos positivos.
+- Persistencia de usuarios, Pokémon y sesión al recargar o volver a abrir el navegador.
 
-### 📕 Pokédex
+**Batalla:** conserva el molde original, incluido el botón «Comenzar batalla». Su funcionalidad queda pendiente.
 
-La aplicación muestra una colección de Pokémon en forma de tarjetas.
+## Cómo administrar los Pokémon
 
-Cada tarjeta puede mostrar:
+1. Ingresar con una cuenta administradora.
+2. Entrar a **Administración** desde el menú o desde el perfil.
+3. Elegir **Cargar nuevo Pokémon** o seleccionar una entrada existente y pulsar **Editar seleccionado**.
+4. Completar el formulario y guardar. Se abrirá el detalle con el estado actualizado.
+5. También se puede entrar al detalle de cualquier Pokémon y pulsar **Editar Pokémon**.
 
--   Número de Pokédex.
--   Nombre.
--   Imagen.
--   Tipo o tipos.
--   Rareza.
--   Botón de detalles.
+El formulario acepta uno o dos tipos. Si tiene evolución, se solicita su nombre, pero el nivel puede quedar vacío para evoluciones por piedra, intercambio u otro método. Si se marca la variante shiny, su imagen pasa a ser obligatoria.
 
-La cantidad de Pokémon mostrada se actualiza automáticamente en el
-encabezado de la Pokédex.
+Las imágenes y sonidos se indican con rutas como `./assets/img/pikachu.png` y `./assets/sound/pikachu.mp3`, o con URL completas `https://...` / `http://...`. Para recursos locales nuevos, copiar previamente el archivo a la carpeta correspondiente; guardar la ruta no copia el archivo. Las URL externas deben apuntar directamente al recurso y estar disponibles.
 
-### 🏷️ Tipos Pokémon
+## Organización y lógica
 
-Los Pokémon pueden tener uno o dos tipos.
-
-El sistema genera automáticamente las etiquetas de tipo y normaliza los
-nombres para utilizar las clases CSS correspondientes, incluyendo tipos
-con caracteres especiales como:
-
--   Eléctrico
--   Psíquico
--   Dragón
--   Veneno
--   Planta
--   Fuego
--   Agua
--   Tierra
--   Normal
-
-### 🔎 Buscador
-
-La interfaz incluye un campo preparado para buscar Pokémon.
-
-El formulario y el campo de búsqueda ya forman parte de la interfaz
-principal.
-
-### 👤 Usuarios
-
-El proyecto incluye una base de datos local de usuarios en:
-
-``` text
-js/db/usuarios.js
+```text
+PokeApp-Carribale-Pokedex/
+├── index.html
+├── css/style.css
+├── js/
+│   ├── app.js
+│   ├── persistencia.js
+│   ├── script.js
+│   └── db/
+│       ├── pokemones.js
+│       ├── usuarios.js
+│       ├── avatares.js
+│       └── game.js
+└── assets/
+    ├── img/
+    ├── sound/
+    └── avatar/
 ```
 
-Cada usuario puede contener:
+- `app.js`: funciones que cambian las vistas dentro de `#app` con `innerHTML`. Después de crear cada vista, se asignan sus eventos con `addEventListener`.
+- `persistencia.js`: inicializa los datos una sola vez y contiene las funciones para leer, agregar y actualizar objetos mediante JSON y localStorage.
+- `db/pokemones.js`: los diez Pokémon iniciales de Carribale. Se agregó `descripcion` a cada objeto porque faltaba en el archivo original.
+- `db/usuarios.js`: usuarios de prueba. El nombre de usuario usa la propiedad `username`, igual que en el ejemplo y la consigna; se conservaron sus valores originales.
+- `db/avatares.js`: nombres de los avatares que ya están incluidos en el proyecto.
+- `db/game.js` y `script.js`: se conservan para el desarrollo posterior.
 
--   ID.
--   Nombre.
--   Email.
--   Nombre de usuario.
--   Contraseña.
--   Avatar.
--   Permiso de administrador.
+Se usan funciones, constantes y variables, arrays, objetos, condicionales, recorridos, módulos, DOM y formularios. No hay frameworks ni librerías externas de JavaScript.
 
-Los avatares se almacenan en:
+### Guardado
 
-``` text
-assets/avatar/
-```
+| Clave | Contenido |
+| --- | --- |
+| `carribale-pokemones` | Array completo y actualizado de Pokémon |
+| `carribale-usuarios` | Array completo y actualizado de usuarios |
+| `carribale-sesion` | ID del usuario que inició sesión |
 
-La carpeta contiene una gran variedad de imágenes de entrenadores Pokémon que pueden utilizarse
-para representar a los usuarios.
+Para agregar, se lee el array, se utiliza `push` y se guarda con `JSON.stringify`. Para editar, se recorre el array, se reemplaza el objeto con el mismo ID original y se vuelve a guardar. Los campos numéricos del formulario de Pokémon usan `valueAsNumber`; las casillas usan `checked`.
 
-### ⚔️ Batalla
+El perfil siempre se obtiene buscando el ID de sesión en el array actualizado de usuarios. Así se conserva el rol original y los cambios del perfil se muestran también después de recargar.
 
-La navegación incluye una sección denominada **Batalla** y el proyecto
-cuenta con el archivo:
+Los datos se guardan solo en el navegador, equipo y origen utilizados; no se comparten entre dispositivos. Las cuentas y contraseñas siguen la lógica simple del ejercicio con localStorage, destinada a este proyecto educativo.
 
-``` text
-js/db/game.js
-```
+Si se modifican los archivos de datos iniciales después de haber usado la aplicación, los cambios no reemplazan los datos ya guardados. Se pueden editar los Pokémon desde administración. Para volver a los datos iniciales del proyecto base, eliminar las tres claves `carribale-*` desde las herramientas del navegador y recargar; esto borra los registros y cambios locales.
 
-Este archivo está preparado para incorporar la lógica del sistema de
-batalla.
+## Comprobación de funcionamiento
 
-Actualmente, la lógica de batalla no está implementada en este archivo.
+1. Ingresar como administrador, comprobar los datos y el acceso a Administración.
+2. Cargar un Pokémon nuevo y verificar su descripción en el detalle y su tarjeta en la Pokédex.
+3. Editar un Pokémon inicial y el nuevo; recargar y verificar que ambos cambios permanezcan.
+4. Cerrar sesión y registrar una cuenta nueva. Comprobar su avatar y la ausencia de opciones de administración.
+5. Editar el perfil y recargar. Probar cambiar la contraseña primero con una actual incorrecta y luego con la correcta.
+6. Cerrar sesión: la contraseña anterior debe fallar y la nueva debe permitir entrar.
+7. Probar repetir un correo, usuario o número de Pokémon: debe aparecer un mensaje sin guardar el duplicado.
+8. Verificar que la Batalla deje seleccionar pokemones y terminar el recorrido del combate.
 
-------------------------------------------------------------------------
-
-## 🧬 Pokémon incluidos
-
-La base de datos actual contiene 10 Pokémon:
-
-    N.º Pokémon      Tipo              Rareza
-  ----- ------------ ----------------- ------------
-    001 Bulbasaur    Planta / Veneno   Común
-    004 Charmander   Fuego             Común
-    007 Squirtle     Agua              Común
-    025 Pikachu      Eléctrico         Raro
-    054 Psyduck      Agua              Común
-    104 Cubone       Tierra            Poco común
-    133 Eevee        Normal            Raro
-    143 Snorlax      Normal            Raro
-    150 Mewtwo       Psíquico          Legendario
-    151 Mew          Psíquico          Mítico
-
-Los datos se encuentran en:
-
-``` text
-js/db/pokemones.js
-```
-
-Cada Pokémon posee información adicional como:
-
-``` js
-{
-  id,
-  nombre,
-  tipo,
-  altura,
-  peso,
-  generacion,
-  hp,
-  ataque,
-  velocidad,
-  defensa,
-  habilidad,
-  tieneEvolucion,
-  evolucion,
-  nivelEvolucion,
-  rareza,
-  imagen,
-  sonido,
-  shiny,
-  imagenShiny
-}
-```
-
-------------------------------------------------------------------------
-
-## 📁 Estructura del proyecto
-
-``` text
-PokeApp-Carribale/
-└── PokeApp/
-    ├── index.html
-    │
-    ├── css/
-    │   └── style.css
-    │
-    ├── js/
-    │   ├── app.js
-    │   ├── script.js
-    │   │
-    │   └── db/
-    │       ├── pokemones.js
-    │       ├── usuarios.js
-    │       └── game.js
-    │
-    └── assets/
-        ├── avatar/
-        │   └── *.png
-        │
-        ├── img/
-        │   ├── *.png
-        │   ├── *-shiny.png
-        │   └── logo-pokemon.svg
-        │
-        └── sound/
-            ├── *.mp3
-            └── *.ogg
-```
-
-------------------------------------------------------------------------
-
-## 🛠️ Tecnologías utilizadas
-
-### HTML5
-
-Utilizado para construir la estructura de la aplicación.
-
-### CSS3
-
-Utilizado para:
-
--   Diseño de la Pokédex.
--   Tarjetas de Pokémon.
--   Colores por tipo.
--   Diseño responsive.
--   Elementos visuales de la interfaz.
--   Animaciones y efectos visuales.
-
-### JavaScript
-
-Utilizado para:
-
--   Importar la base de datos.
--   Generar dinámicamente las tarjetas.
--   Mostrar la cantidad de Pokémon.
--   Procesar los tipos.
--   Formatear los números de Pokédex.
--   Insertar contenido dinámicamente en el DOM.
-
-El proyecto utiliza **JavaScript Modules**, por ejemplo:
-
-``` js
-import { pokemones } from "./db/pokemones.js";
-```
-
-------------------------------------------------------------------------
-
-## 🚀 Cómo ejecutar el proyecto
-
-No se necesita instalar un framework ni un sistema de backend para
-visualizar la Pokédex.
-
-### Opción recomendada: Visual Studio Code
-
-1.  Descargar o clonar el proyecto.
-2.  Abrir la carpeta `PokeApp` en **Visual Studio Code**.
-3.  Instalar la extensión **Live Server**.
-4.  Abrir `index.html` con **Open with Live Server**.
-5.  La aplicación se abrirá en el navegador.
-
-### ⚠️ Importante
-
-Como el proyecto utiliza módulos JavaScript mediante:
-
-``` html
-<script type="module" src="./js/app.js"></script>
-```
-
-es recomendable ejecutarlo mediante un servidor local como **Live
-Server**, en lugar de abrir directamente `index.html` con doble clic.
-
-------------------------------------------------------------------------
-
-## 🎨 Diseño
-
-La interfaz está inspirada visualmente en una Pokédex clásica.
-
-Algunos elementos principales son:
-
--   🔴 Carcasa roja.
--   🔵 Pantalla azul.
--   💡 Indicadores luminosos.
--   ⚫ Controles oscuros.
--   🟡 Detalles amarillos.
--   🟥 Tarjetas de Pokémon.
--   🏷️ Etiquetas diferenciadas por tipo.
--   🎮 Tipografía inspirada en videojuegos.
-
-El diseño utiliza las fuentes **Inter** y **Press Start 2P**.
-
-------------------------------------------------------------------------
-
-## 🖼️ Recursos
-
-Los recursos multimedia están organizados en tres carpetas:
-
-### `assets/img/`
-
-Contiene las imágenes de los Pokémon, incluyendo versiones normales y
-shiny.
-
-Ejemplo:
-
-``` text
-pikachu.png
-pikachu-shiny.png
-mewtwo.png
-mewtwo-shiny.png
-```
-
-### `assets/sound/`
-
-Contiene archivos de sonido asociados a los Pokémon.
-
-Actualmente existen archivos en formatos:
-
-``` text
-.mp3
-.ogg
-```
-
-### `assets/avatar/`
-
-Contiene los diferentes avatares disponibles para los usuarios.
-
-------------------------------------------------------------------------
-
-## 🧑‍💻 Archivos principales
-
-### `index.html`
-
-Es la página principal de la aplicación.
-
-Contiene:
-
--   Encabezado.
--   Logo.
--   Navegación.
--   Buscador.
--   Contador de entradas.
--   Área principal de la Pokédex.
--   Pie de página.
-
-### `js/app.js`
-
-Es el archivo principal de JavaScript.
-
-Se encarga de:
-
-1.  Importar los Pokémon.
-2.  Crear la galería.
-3.  Generar las tarjetas.
-4.  Mostrar los tipos.
-5.  Formatear los números.
-6.  Actualizar el contador.
-
-### `js/db/pokemones.js`
-
-Contiene la información de los Pokémon.
-
-### `js/db/usuarios.js`
-
-Contiene los usuarios de prueba y sus datos.
-
-### `js/db/game.js`
-
-Archivo destinado a la lógica relacionada con el sistema de batalla.
-
-### `js/script.js`
-
-Archivo JavaScript adicional preparado para futuras funcionalidades.
-
-------------------------------------------------------------------------
-
-## 👨‍💻 Autor
-
-**Valentino Carribale**
-
-Materia: **Funcionamiento de Sistemas Digitales** - *Roberto Argumedo*
+Autor: **Valentino Carribale**. Materia: **Funcionamiento de Sistemas Digitales**. Profesor: **Roberto Argumedo**.

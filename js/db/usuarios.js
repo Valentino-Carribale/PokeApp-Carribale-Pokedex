@@ -4,7 +4,7 @@ export const usuarios = [
     nombre: "Mateo",
     apellido: "Gómez",
     email: "mateo.gomez@gmail.com",
-    usuario: "mateog_24",
+    username: "mateog_24",
     password: "M4teo#8291",
     avatar: "./assets/avatar/hau.png",
     admin: true
@@ -14,7 +14,7 @@ export const usuarios = [
     nombre: "Sofía",
     apellido: "Ramírez",
     email: "sofia.ramirez@gmail.com",
-    usuario: "sofi_ram",
+    username: "sofi_ram",
     password: "S0fia!4726",
     avatar: "./assets/avatar/iris.png",
     admin: false
@@ -24,7 +24,7 @@ export const usuarios = [
     nombre: "Lucas",
     apellido: "Fernández",
     email: "lucas.fernandez@gmail.com",
-    usuario: "lucasf_93",
+    username: "lucasf_93",
     password: "Luca$5814",
     avatar: "./assets/avatar/genji.png",
     admin: false
@@ -34,7 +34,7 @@ export const usuarios = [
     nombre: "Valentina",
     apellido: "Torres",
     email: "valentina.torres@gmail.com",
-    usuario: "valentorres",
+    username: "valentorres",
     password: "Vale#7632",
     avatar: "./assets/avatar/kasumi.png",
     admin: false
@@ -44,7 +44,7 @@ export const usuarios = [
     nombre: "Nicolás",
     apellido: "Acosta",
     email: "nicolas.acosta@gmail.com",
-    usuario: "nico_acosta",
+    username: "nico_acosta",
     password: "N1co!2947",
     avatar: "./assets/avatar/red.png",
     admin: false
@@ -54,7 +54,7 @@ export const usuarios = [
     nombre: "Camila",
     apellido: "Mendoza",
     email: "camila.mendoza@gmail.com",
-    usuario: "cami_mdz",
+    username: "cami_mdz",
     password: "Cami#6183",
     avatar: "./assets/avatar/mei.png",
     admin: false
@@ -64,7 +64,7 @@ export const usuarios = [
     nombre: "Tomás",
     apellido: "Herrera",
     email: "tomas.herrera@gmail.com",
-    usuario: "tomi_herrera",
+    username: "tomi_herrera",
     password: "T0mas$9351",
     avatar: "./assets/avatar/green.png",
     admin: false
@@ -74,7 +74,7 @@ export const usuarios = [
     nombre: "Julieta",
     apellido: "Sosa",
     email: "julieta.sosa@gmail.com",
-    usuario: "juli_sosa",
+    username: "juli_sosa",
     password: "Juli!4072",
     avatar: "./assets/avatar/shirona.png",
     admin: false
@@ -84,7 +84,7 @@ export const usuarios = [
     nombre: "Franco",
     apellido: "Navarro",
     email: "franco.navarro@gmail.com",
-    usuario: "fran_navarro",
+    username: "fran_navarro",
     password: "Fran#8524",
     avatar: "./assets/avatar/cheren.png",
     admin: false
@@ -94,7 +94,7 @@ export const usuarios = [
     nombre: "Agustina",
     apellido: "Pérez",
     email: "agustina.perez@gmail.com",
-    usuario: "agus_perez",
+    username: "agus_perez",
     password: "Agus$3168",
     avatar: "./assets/avatar/matsurika.png",
     admin: false
