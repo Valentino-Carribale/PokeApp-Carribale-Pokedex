@@ -1,4 +1,4 @@
-// Importamos las funciones encargadas de guardar y leer datos.
+// Importar las funciones encargadas de guardar y leer datos.
 import {
   leerPokemones,
   guardarPokemones,
@@ -11,10 +11,10 @@ import {
   cerrarSesion
 } from "./persistencia.js";
 
-// Importamos los nombres de los avatares disponibles.
+// Importar los nombres de los avatares disponibles.
 import { avatares } from "./db/avatares.js";
 
-// Importamos los datos de la batalla.
+// Importar los datos de la batalla.
 import { escenasBatalla } from "./db/game.js";
 
 // ==========================================================
@@ -24,8 +24,8 @@ import { escenasBatalla } from "./db/game.js";
 // querySelector busca el primer elemento que coincide
 // con el selector CSS indicado.
 //
-// # indica que buscamos por ID.
-// . indica que buscamos por clase.
+// # indica que se busca por ID.
+// . indica que se busca por clase.
 //
 // Estos elementos ya existen en index.html.
 const app = document.querySelector("#app");
@@ -86,7 +86,7 @@ function texto(valor) {
 // ==========================================================
 
 function numeroPokedex(id) {
-  // Agregamos ceros solamente para mostrar el número.
+  // Se agrega ceros solamente para mostrar el número.
   // El ID original guardado no se modifica.
   //
   // 3 se muestra como 003.
@@ -108,17 +108,17 @@ function cambiarPantalla(titulo, link) {
   // textContent modifica solamente el texto del elemento.
   document.querySelector(".display-heading h1").textContent = titulo;
 
-  // Cambiamos también el título de la pestaña del navegador.
+  // Cambiar también el título de la pestaña del navegador.
   document.title = titulo + " | PokeApp";
 
   // querySelectorAll obtiene todos los enlaces del menú.
-  // Recorremos los enlaces y quitamos la marca de pantalla actual.
+  // Se recorren los enlaces y se quita la marca de pantalla actual.
   for (let enlace of document.querySelectorAll(".header-nav a")) {
     enlace.classList.remove("active");
     enlace.removeAttribute("aria-current");
   }
 
-  // Si recibimos un enlace, lo marcamos como activo.
+  // Si se recibe un enlace, se lo marca como activo.
   if (link !== null) {
     link.classList.add("active");
 
@@ -133,10 +133,10 @@ function cambiarPantalla(titulo, link) {
 // ==========================================================
 
 function actualizarMenu() {
-  // Obtenemos el usuario conectado o null si no hay sesión.
+  // Se obtiene el usuario conectado o null si no hay sesión.
   const usuario = leerSesion();
 
-  // Primero dejamos el menú en estado de visitante.
+  // Primero se deja el menú en estado de visitante.
   //
   // hidden = true oculta un elemento.
   // hidden = false lo muestra.
@@ -145,7 +145,7 @@ function actualizarMenu() {
   linkAdmin.hidden = true;
   linkSalir.hidden = true;
 
-  // Si existe una sesión, adaptamos las opciones.
+  // Si existe una sesión, se adaptan las opciones.
   if (usuario !== null) {
     linkLogin.textContent = "Mi perfil";
     linkRegistro.hidden = true;
@@ -166,7 +166,7 @@ function actualizarMenu() {
 
 function mensajeFormulario(mensaje) {
   // Cada formulario tiene un espacio con la clase form-message.
-  // Escribimos allí el aviso recibido.
+  // Se escribe allí el aviso recibido.
   document.querySelector(".form-message").textContent = mensaje;
 }
 
@@ -175,15 +175,15 @@ function mensajeFormulario(mensaje) {
 // ==========================================================
 
 function buscarPokemon(id) {
-  // Leemos la lista actualizada y recorremos sus objetos.
+  // Se lee la lista actualizada y se recorren sus objetos.
   for (let pokemon of leerPokemones()) {
     if (pokemon.id === id) {
-      // Al encontrarlo, lo devolvemos y termina la función.
+      // Al encontrarlo, se lo devuelve y termina la función.
       return pokemon;
     }
   }
 
-  // Si terminó el recorrido sin encontrarlo, devolvemos null.
+  // Si terminó el recorrido sin encontrarlo, se devuelve null.
   return null;
 }
 
@@ -208,11 +208,11 @@ function esAdmin() {
 
 // Recibe un array, por ejemplo ["Planta", "Veneno"].
 function crearTipos(lista) {
-  // Comenzamos con un texto vacío.
+  // Se comienza con un texto vacío.
   let html = "";
 
   for (let tipo of lista) {
-    // += agrega contenido al texto que ya teníamos.
+    // += agrega contenido al texto que ya había.
     //
     // La clase generada, por ejemplo type-Planta,
     // determina el color mediante el CSS.
@@ -223,7 +223,7 @@ function crearTipos(lista) {
     `;
   }
 
-  // Devolvemos el HTML completo de las etiquetas.
+  // Se devuelve el HTML completo de las etiquetas.
   return html;
 }
 
@@ -277,7 +277,7 @@ function mostrarPokedex() {
 
   // innerHTML reemplaza todo el contenido anterior de #app.
   //
-  // Primero creamos la estructura y dejamos un contenedor
+  // Primero se crea la estructura y se deja un contenedor
   // vacío para colocar las tarjetas.
   app.innerHTML = `
     <section class="pokedex-section">
@@ -291,13 +291,13 @@ function mostrarPokedex() {
     </section>
   `;
 
-  // Cada vez que abrimos la Pokédex leemos los datos guardados.
+  // Cada vez que se abre la Pokédex se leen los datos guardados.
   // Así aparecen también los Pokémon nuevos o editados.
   const pokemones = leerPokemones();
 
   let tarjetas = "";
 
-  // Creamos el HTML de una tarjeta por cada Pokémon.
+  // Crear el HTML de una tarjeta por cada Pokémon.
   for (let pokemon of pokemones) {
     tarjetas += crearTarjeta(
       pokemon.nombre,
@@ -312,11 +312,11 @@ function mostrarPokedex() {
   document.querySelector("#cantidad-pokemon").textContent =
     pokemones.length;
 
-  // Insertamos todas las tarjetas juntas.
+  // Se insertan todas las tarjetas juntas.
   document.querySelector("#pokedex-gallery").innerHTML = tarjetas;
 
   // Los botones recién existen después de insertar el HTML.
-  // Por eso les asignamos sus eventos en este momento.
+  // Por eso se les asignan sus eventos en este momento.
   for (let boton of document.querySelectorAll(".btn-detalle")) {
     boton.addEventListener("click", function () {
       // dataset.id obtiene el atributo data-id del botón.
@@ -333,12 +333,12 @@ function mostrarPokedex() {
 // 11. MOSTRAR EL DETALLE DE UN POKÉMON
 // ==========================================================
 
-// id: Pokémon que queremos consultar.
+// id: Pokémon que se desea consultar.
 // mensaje: aviso opcional después de agregarlo o editarlo.
 function mostrarDetalle(id, mensaje) {
   const pokemon = buscarPokemon(id);
 
-  // Si no existe, volvemos a la galería y detenemos la función.
+  // Si no existe, se vuelve a la galería y se detiene la función.
   if (pokemon === null) {
     mostrarPokedex();
     return;
@@ -346,7 +346,7 @@ function mostrarDetalle(id, mensaje) {
 
   cambiarPantalla(pokemon.nombre, linkPokedex);
 
-  // Preparamos el texto que describe su evolución.
+  // Se prepara el texto que describe su evolución.
   let evolucion = "No tiene evolución.";
 
   if (pokemon.tieneEvolucion) {
@@ -464,14 +464,14 @@ function mostrarDetalle(id, mensaje) {
     </section>
   `;
 
-  // Pasamos el nombre de la función sin paréntesis.
+  // Pasar el nombre de la función sin paréntesis.
   // Se ejecutará cuando ocurra el clic.
   document.querySelector("#volver-pokedex").addEventListener(
     "click",
     mostrarPokedex
   );
 
-  // Si tiene sonido, agregamos el reproductor de audio.
+  // Si tiene sonido, se agrega el reproductor de audio.
   //
   // controls muestra sus controles.
   // preload="none" evita precargar el archivo de sonido.
@@ -486,7 +486,7 @@ function mostrarDetalle(id, mensaje) {
     `;
   }
 
-  // Agregamos el botón shiny solamente si tiene esa variante
+  // Se agrega el botón shiny solamente si tiene esa variante
   // y una imagen indicada.
   if (pokemon.shiny && pokemon.imagenShiny !== "") {
     document.querySelector("#detail-actions").innerHTML += `
@@ -495,7 +495,7 @@ function mostrarDetalle(id, mensaje) {
       </button>
     `;
 
-    // Esta variable recuerda qué versión estamos mostrando.
+    // Esta variable recuerda qué versión se está mostrando.
     // Al abrir la ficha, comienza con la imagen normal.
     let mostrandoShiny = false;
 
@@ -506,18 +506,18 @@ function mostrarDetalle(id, mensaje) {
         // false pasa a true y true pasa a false.
         mostrandoShiny = !mostrandoShiny;
 
-        // Partimos de la versión normal.
+        // Se parte de la versión normal.
         let imagen = pokemon.imagen;
         let etiqueta = "Ver shiny";
 
-        // Si activamos shiny, cambiamos la imagen
+        // Si se activa shiny, se cambia la imagen
         // y el texto del botón.
         if (mostrandoShiny) {
           imagen = pokemon.imagenShiny;
           etiqueta = "Ver normal";
         }
 
-        // Actualizamos los elementos existentes.
+        // Se actualizan los elementos existentes.
         document.querySelector("#imagen-detalle").src = imagen;
         document.querySelector("#ver-shiny").textContent = etiqueta;
       }
@@ -548,7 +548,7 @@ function mostrarDetalle(id, mensaje) {
 function mostrarBienvenida() {
   const usuario = leerSesion();
 
-  // Si hay sesión, mostramos directamente el perfil.
+  // Si hay sesión, se muestra directamente el perfil.
   if (usuario !== null) {
     mostrarPerfil("");
     return;
@@ -556,7 +556,7 @@ function mostrarBienvenida() {
 
   cambiarPantalla("Bienvenido", linkInicio);
 
-  // Si no hay sesión, mostramos la bienvenida general.
+  // Si no hay sesión, se muestra la bienvenida general.
   app.innerHTML = `
     <section class="pantalla welcome-panel">
       <p class="eyebrow">TU AVENTURA COMIENZA ACÁ</p>
@@ -581,7 +581,7 @@ function mostrarBienvenida() {
     </section>
   `;
 
-  // Asignamos las acciones de los botones recién creados.
+  // Se asignan las acciones de los botones recién creados.
   document.querySelector("#inicio-login").addEventListener(
     "click",
     mostrarLogin
@@ -598,7 +598,7 @@ function mostrarBienvenida() {
 // ==========================================================
 
 function mostrarLogin() {
-  // Si ya está conectado, no pedimos otro inicio de sesión.
+  // Si ya está conectado, no se pide otro inicio de sesión.
   if (leerSesion() !== null) {
     mostrarPerfil("");
     return;
@@ -659,7 +659,7 @@ function mostrarLogin() {
   document.querySelector("#form-login").addEventListener(
     "submit",
     function (event) {
-      // Evitamos el envío tradicional y la recarga de la página.
+      // Se evita el envío tradicional y la recarga de la página.
       event.preventDefault();
 
       // value obtiene lo escrito.
@@ -671,7 +671,7 @@ function mostrarLogin() {
       // La contraseña se mantiene tal como se ingresó.
       const password = document.querySelector("#password").value;
 
-      // Recorremos todos los usuarios guardados.
+      // Se recorren todos los usuarios guardados.
       for (let usuario of leerUsuarios()) {
         // Se acepta:
         // (usuario correcto O correo correcto)
@@ -683,20 +683,20 @@ function mostrarLogin() {
           ) &&
           usuario.password === password
         ) {
-          // Recordamos quién inició sesión.
+          // Se registra quién inició sesión.
           iniciarSesion(usuario.id);
 
-          // Adaptamos el menú y mostramos el perfil.
+          // Se adapta el menú y se muestra el perfil.
           actualizarMenu();
           mostrarPerfil("");
 
-          // Terminamos para no seguir buscando
+          // Se termina para no seguir buscando
           // ni mostrar el mensaje de error.
           return;
         }
       }
 
-      // Solo llegamos acá si ninguna cuenta coincidió.
+      // Solo se llega acá si ninguna cuenta coincidió.
       mensajeFormulario("Usuario, correo o contraseña incorrectos.");
     }
   );
@@ -709,7 +709,7 @@ function mostrarLogin() {
 function opcionesAvatar() {
   let opciones = "";
 
-  // Convertimos cada nombre del array en una opción del select.
+  // Se convierte cada nombre del array en una opción del select.
   for (let avatar of avatares) {
     // El value contiene la ruta que luego se guardará
     // dentro de la propiedad avatar del usuario.
@@ -730,10 +730,10 @@ function opcionesAvatar() {
 function activarAvatar(valor) {
   const selector = document.querySelector("#avatar");
 
-  // Elegimos la opción inicial.
+  // Se elige la opción inicial.
   selector.value = valor;
 
-  // Mostramos la imagen correspondiente.
+  // Se muestra la imagen correspondiente.
   document.querySelector("#avatar-preview").src = selector.value;
 
   // change se dispara cuando cambia la opción seleccionada.
@@ -750,7 +750,7 @@ function usuarioDuplicado(email, username, id) {
   // Al registrar, id es null: se revisan todas las cuentas.
   //
   // Al editar, id es el ID del usuario actual:
-  // excluimos esa cuenta para no detectarla como duplicada.
+  // se excluye esa cuenta para no detectarla como duplicada.
   for (let usuario of leerUsuarios()) {
     if (
       usuario.id !== id &&
@@ -763,7 +763,7 @@ function usuarioDuplicado(email, username, id) {
     }
   }
 
-  // No encontramos otra cuenta con esos datos.
+  // No se encuentra otra cuenta con esos datos.
   return false;
 }
 
@@ -772,7 +772,7 @@ function usuarioDuplicado(email, username, id) {
 // ==========================================================
 
 function mostrarRegistro() {
-  // Si ya hay una sesión, mostramos el perfil.
+  // Si ya hay una sesión, se muestra el perfil.
   if (leerSesion() !== null) {
     mostrarPerfil("");
     return;
@@ -880,7 +880,7 @@ function mostrarRegistro() {
     </section>
   `;
 
-  // Seleccionamos un avatar inicial.
+  // Se selecciona un avatar inicial.
   activarAvatar("./assets/avatar/red.png");
 
   // Lo siguiente se ejecuta cuando se envía el formulario.
@@ -889,7 +889,7 @@ function mostrarRegistro() {
     function (event) {
       event.preventDefault();
 
-      // Capturamos los datos ingresados.
+      // Se capturan los datos ingresados.
       const nombre = document.querySelector("#nombre").value.trim();
       const apellido = document.querySelector("#apellido").value.trim();
       const email = document.querySelector("#email")
@@ -898,7 +898,7 @@ function mostrarRegistro() {
         .value.trim();
       const password = document.querySelector("#nueva-password").value;
 
-      // Rechazamos los campos que están vacíos
+      // Se rechazan los campos que están vacíos
       // o contienen solamente espacios.
       if (
         nombre === "" ||
@@ -911,7 +911,7 @@ function mostrarRegistro() {
         return;
       }
 
-      // No permitimos repetir el correo o nombre de usuario.
+      // No se permite repetir el correo o nombre de usuario.
       if (usuarioDuplicado(email, username, null)) {
         mensajeFormulario(
           "El correo o nombre de usuario ya está registrado."
@@ -928,9 +928,9 @@ function mostrarRegistro() {
         return;
       }
 
-      // Buscamos un ID mayor que todos los existentes.
+      // Se busca un ID mayor que todos los existentes.
       //
-      // No usamos solamente la cantidad de usuarios,
+      // No se usa solamente la cantidad de usuarios,
       // porque los ID podrían tener saltos.
       let id = 1;
 
@@ -940,7 +940,7 @@ function mostrarRegistro() {
         }
       }
 
-      // Construimos el objeto que representa la cuenta.
+      // Se construye el objeto que representa la cuenta.
       //
       // admin siempre es false:
       // un usuario nuevo no puede elegirse administrador.
@@ -955,7 +955,7 @@ function mostrarRegistro() {
         admin: false
       };
 
-      // Guardamos la cuenta y conectamos automáticamente al usuario.
+      // Se guarda la cuenta y se conecta automáticamente al usuario.
       guardarUsuarios(nuevoUsuario);
       iniciarSesion(nuevoUsuario.id);
 
@@ -972,7 +972,7 @@ function mostrarRegistro() {
 function mostrarPerfil(mensaje) {
   const usuario = leerSesion();
 
-  // Sin sesión válida, pedimos iniciar sesión.
+  // Sin sesión válida, se pide iniciar sesión.
   if (usuario === null) {
     mostrarLogin();
     return;
@@ -980,14 +980,14 @@ function mostrarPerfil(mensaje) {
 
   cambiarPantalla("Mi perfil", linkLogin);
 
-  // Elegimos el nombre visible del rol.
+  // Se elige el nombre visible del rol.
   let rol = "Entrenador";
 
   if (usuario.admin) {
     rol = "Administrador";
   }
 
-  // Mostramos los datos actuales de la cuenta.
+  // Se muestra los datos actuales de la cuenta.
   // La contraseña no se muestra en esta pantalla.
   app.innerHTML = `
     <section class="user-profile">
@@ -1055,7 +1055,7 @@ function mostrarPerfil(mensaje) {
     mostrarPokedex
   );
 
-  // Solo agregamos este acceso cuando la cuenta es administradora.
+  // Solo se agrega este acceso cuando la cuenta es administradora.
   if (usuario.admin) {
     document.querySelector("#perfil-admin").innerHTML = `
       <button id="administrar" class="btn-secondary">
@@ -1084,7 +1084,7 @@ function mostrarEditarPerfil() {
 
   cambiarPantalla("Editar perfil", linkLogin);
 
-  // Creamos los campos de edición.
+  // Se crea los campos de edición.
   //
   // Los campos de contraseña son opcionales y comienzan vacíos.
   // Dejarlos vacíos conserva la contraseña actual.
@@ -1192,7 +1192,7 @@ function mostrarEditarPerfil() {
     </section>
   `;
 
-  // Precargamos los datos para que puedan modificarse.
+  // Se precargan los datos para que puedan modificarse.
   //
   // Asignar value escribe en un campo.
   // Leer value obtiene su contenido.
@@ -1215,7 +1215,7 @@ function mostrarEditarPerfil() {
     function (event) {
       event.preventDefault();
 
-      // Comprobamos que la sesión siga perteneciendo al mismo usuario.
+      // Se comprueba que la sesión siga perteneciendo al mismo usuario.
       const actual = leerSesion();
 
       if (actual === null || actual.id !== usuario.id) {
@@ -1224,8 +1224,8 @@ function mostrarEditarPerfil() {
         return;
       }
 
-      // Capturamos los valores nuevos.
-      // Todavía no los guardamos en localStorage.
+      // Se capturan los valores nuevos.
+      // Todavía no se los guarda en localStorage.
       const nombre = document.querySelector("#nombre").value.trim();
       const apellido = document.querySelector("#apellido").value.trim();
       const email = document.querySelector("#email")
@@ -1235,27 +1235,27 @@ function mostrarEditarPerfil() {
       const passwordNueva = document.querySelector("#nueva-password").value;
       const confirmar = document.querySelector("#confirmar-password").value;
 
-      // No permitimos nombres vacíos.
+      // No se permiten nombres vacíos.
       if (nombre === "" || apellido === "") {
         mensajeFormulario("Completá nombre y apellido.");
         return;
       }
 
       // El correo no puede pertenecer a otra cuenta.
-      // Pasamos el ID propio para excluirlo de la búsqueda.
+      // Pasar el ID propio para excluirlo de la búsqueda.
       if (usuarioDuplicado(email, actual.username, actual.id)) {
         mensajeFormulario("Ese correo ya pertenece a otro usuario.");
         return;
       }
 
       // Si se completó cualquiera de los campos de contraseña,
-      // exigimos validar todo el cambio.
+      // se exige validar todo el cambio.
       if (
         passwordActual !== "" ||
         passwordNueva !== "" ||
         confirmar !== ""
       ) {
-        // Primero comprobamos la contraseña actual.
+        // Primero se comprueba la contraseña actual.
         if (passwordActual !== actual.password) {
           mensajeFormulario("La contraseña actual es incorrecta.");
           return;
@@ -1273,22 +1273,22 @@ function mostrarEditarPerfil() {
           return;
         }
 
-        // Solo después de validar, reemplazamos la contraseña.
+        // Solo después de validar, se reemplaza la contraseña.
         actual.password = passwordNueva;
       }
 
-      // Modificamos las propiedades editables del objeto.
+      // Se modifican las propiedades editables del objeto.
       //
-      // Conservamos su ID, username y permiso admin.
+      // Se conserva su ID, username y permiso admin.
       actual.nombre = nombre;
       actual.apellido = apellido;
       actual.email = email;
       actual.avatar = document.querySelector("#avatar").value;
 
-      // Guardamos la cuenta actualizada.
+      // Se guarda la cuenta actualizada.
       actualizarUsuario(actual);
 
-      // Volvemos a mostrar el perfil con sus datos nuevos.
+      // Se vuelve a mostrar el perfil con sus datos nuevos.
       mostrarPerfil("Tu perfil se actualizó correctamente.");
     }
   );
@@ -1299,7 +1299,7 @@ function mostrarEditarPerfil() {
 // ==========================================================
 
 function mostrarAdmin() {
-  // Comprobamos el rol al entrar a la función,
+  // Se comprueba el rol al entrar a la función,
   // además de ocultar el enlace en el menú.
   if (!esAdmin()) {
     mostrarBienvenida();
@@ -1308,7 +1308,7 @@ function mostrarAdmin() {
 
   cambiarPantalla("Administración", linkAdmin);
 
-  // Creamos las opciones con todos los Pokémon guardados.
+  // Se crea las opciones con todos los Pokémon guardados.
   let opciones = '<option value="">Seleccioná un Pokémon</option>';
 
   for (let pokemon of leerPokemones()) {
@@ -1363,7 +1363,7 @@ function mostrarAdmin() {
     }
   );
 
-  // Para editar, enviamos el ID seleccionado.
+  // Para editar, se envía el ID seleccionado.
   document.querySelector("#form-elegir-pokemon").addEventListener(
     "submit",
     function (event) {
@@ -1383,7 +1383,7 @@ function mostrarAdmin() {
 function opcionesTipo() {
   let opciones = "";
 
-  // Generamos una opción por cada tipo disponible.
+  // Se genera una opción por cada tipo disponible.
   for (let tipo of tipos) {
     opciones += `<option value="${tipo}">${tipo}</option>`;
   }
@@ -1405,16 +1405,16 @@ function mostrarFormularioPokemon(idOriginal) {
     return;
   }
 
-  // Por defecto, preparamos el modo de carga nueva.
+  // Por defecto, se prepara el modo de carga nueva.
   let pokemon = null;
   let titulo = "Nuevo Pokémon";
   let boton = "Agregar Pokémon";
 
-  // Si recibimos un ID, cambiamos al modo edición.
+  // Si se recibe un ID, se cambia al modo edición.
   if (idOriginal !== null) {
     pokemon = buscarPokemon(idOriginal);
 
-    // Si ese Pokémon no existe, volvemos al panel.
+    // Si ese Pokémon no existe, se vuelve al panel.
     if (pokemon === null) {
       mostrarAdmin();
       return;
@@ -1719,15 +1719,15 @@ function mostrarFormularioPokemon(idOriginal) {
     </section>
   `;
 
-  // Si es edición, completamos los campos con sus datos actuales.
+  // Si es edición, se completan los campos con sus datos actuales.
   if (pokemon !== null) {
     completarFormularioPokemon(pokemon);
   }
 
-  // Ajustamos los campos según el estado de las casillas.
+  // Se ajustan los campos según el estado de las casillas.
   actualizarOpcionales();
 
-  // Volvemos a ajustar los campos cuando cambia una casilla.
+  // Se vuelve a ajustar los campos cuando cambia una casilla.
   document.querySelector("#pokemon-has-evolution").addEventListener(
     "change",
     actualizarOpcionales
@@ -1749,7 +1749,7 @@ function mostrarFormularioPokemon(idOriginal) {
     function (event) {
       event.preventDefault();
 
-      // Conservamos el ID original aunque se cambie
+      // Se conserva el ID original aunque se cambie
       // el número de Pokédex en el formulario.
       guardarFormularioPokemon(idOriginal);
     }
@@ -1761,7 +1761,7 @@ function mostrarFormularioPokemon(idOriginal) {
 // ==========================================================
 
 function completarFormularioPokemon(pokemon) {
-  // Copiamos las propiedades del objeto a los campos.
+  // Se copian las propiedades del objeto a los campos.
   document.querySelector("#pokemon-number").value = pokemon.id;
   document.querySelector("#pokemon-name").value = pokemon.nombre;
   document.querySelector("#pokemon-description").value =
@@ -1787,7 +1787,7 @@ function completarFormularioPokemon(pokemon) {
   document.querySelector("#pokemon-speed").value = pokemon.velocidad;
   document.querySelector("#pokemon-ability").value = pokemon.habilidad;
 
-  // Para casillas usamos checked en lugar de value.
+  // Para casillas se usa checked en lugar de value.
   // checked recibe true o false.
   document.querySelector("#pokemon-has-evolution").checked =
     pokemon.tieneEvolucion;
@@ -1865,7 +1865,7 @@ function rutaValida(ruta) {
 // ==========================================================
 
 function guardarFormularioPokemon(idOriginal) {
-  // Revisamos otra vez el permiso al guardar,
+  // Se revisa otra vez el permiso al guardar,
   // por si la sesión cambió desde que se abrió el formulario.
   if (!esAdmin()) {
     actualizarMenu();
@@ -1882,7 +1882,7 @@ function guardarFormularioPokemon(idOriginal) {
     "#pokemon-type-secondary"
   ).value;
 
-  // Si se eligió un segundo tipo, comprobamos que sea diferente.
+  // Si se eligió un segundo tipo, se comprueba que sea diferente.
   if (segundoTipo !== "") {
     if (segundoTipo === tipo[0]) {
       mensajeFormulario("Los dos tipos deben ser diferentes.");
@@ -1909,7 +1909,7 @@ function guardarFormularioPokemon(idOriginal) {
       return;
     }
 
-    // Solo leemos el nivel como número cuando tiene contenido.
+    // Solo se lee el nivel como número cuando tiene contenido.
     // Dejarlo vacío conserva null.
     if (
       document.querySelector("#pokemon-evolution-level").value !== ""
@@ -1920,7 +1920,7 @@ function guardarFormularioPokemon(idOriginal) {
     }
   }
 
-  // Si no hay shiny, guardamos su ruta vacía.
+  // Si no hay shiny, se guarda su ruta vacía.
   let imagenShiny = "";
 
   const shiny = document.querySelector("#pokemon-shiny").checked;
@@ -1930,13 +1930,13 @@ function guardarFormularioPokemon(idOriginal) {
       .value.trim();
   }
 
-  // Construimos el objeto completo.
+  // Se construye el objeto completo.
   //
   // value devuelve texto.
   // valueAsNumber devuelve un número desde un campo numérico.
   // checked devuelve true o false desde una casilla.
   //
-  // En modo edición también construimos el objeto entero:
+  // En modo edición también se construye el objeto entero:
   // será la nueva versión que reemplazará al anterior.
   const nuevoPokemon = {
     id: document.querySelector("#pokemon-number").valueAsNumber,
@@ -1983,7 +1983,7 @@ function guardarFormularioPokemon(idOriginal) {
     imagenShiny: imagenShiny
   };
 
-  // Rechazamos los textos obligatorios que quedaron vacíos
+  // Se rechazan los textos obligatorios que quedaron vacíos
   // después de quitar espacios externos.
   if (
     nuevoPokemon.nombre === "" ||
@@ -1996,9 +1996,9 @@ function guardarFormularioPokemon(idOriginal) {
     return;
   }
 
-  // Comprobamos que no haya otro Pokémon con el mismo ID o nombre.
+  // Se comprueba que no haya otro Pokémon con el mismo ID o nombre.
   //
-  // Al editar, excluimos el Pokémon que tenía idOriginal:
+  // Al editar, se excluye el Pokémon que tenía idOriginal:
   // no debe considerarse un duplicado de sí mismo.
   for (let pokemon of leerPokemones()) {
     if (
@@ -2016,7 +2016,7 @@ function guardarFormularioPokemon(idOriginal) {
     }
   }
 
-  // Validamos los prefijos de imagen y sonido.
+  // Se valida los prefijos de imagen y sonido.
   // La imagen shiny solo se revisa si esa variante está activa.
   if (
     !rutaValida(nuevoPokemon.imagen) ||
@@ -2030,19 +2030,19 @@ function guardarFormularioPokemon(idOriginal) {
   }
 
   // Todas las validaciones pasaron.
-  // Ahora sí decidimos qué operación de guardado corresponde.
+  // Ahora sí se decide qué operación de guardado corresponde.
   let mensaje = "Pokémon agregado correctamente.";
 
   if (idOriginal === null) {
     // No había ID original: es una carga nueva.
     guardarPokemones(nuevoPokemon);
   } else {
-    // Había ID original: reemplazamos ese registro.
+    // Había ID original: se reemplaza ese registro.
     actualizarPokemon(idOriginal, nuevoPokemon);
     mensaje = "Pokémon actualizado correctamente.";
   }
 
-  // Abrimos el detalle con los datos guardados.
+  // Se abre el detalle con los datos guardados.
   mostrarDetalle(nuevoPokemon.id, mensaje);
 }
 
@@ -2060,9 +2060,9 @@ function mostrarBatalla() {
 function mostrarEscenaBatalla(id) {
   for (let escena of escenasBatalla) {
     if (escena.id === id) {
-      // Primero creamos la pantalla.
+      // Primero se crea la pantalla.
       //
-      // Dejamos espacios vacíos para insertar después
+      // Se deja espacios vacíos para insertar después
       // los párrafos y las opciones de esta escena.
       //
       // escena.tipo permite aplicar estilos distintos
@@ -2134,7 +2134,7 @@ function mostrarEscenaBatalla(id) {
         </section>
       `;
 
-      // Recorremos los textos de la escena y agregamos
+      // Se recorren los textos de la escena y se agrega
       // un párrafo por cada elemento del array.
       const narracion = document.querySelector("#texto-batalla");
 
@@ -2142,7 +2142,7 @@ function mostrarEscenaBatalla(id) {
         narracion.innerHTML += `<p>${parrafo}</p>`;
       }
 
-      // Creamos un botón por cada opción disponible.
+      // Se crea un botón por cada opción disponible.
       const opciones = document.querySelector("#opciones-batalla");
 
       for (let opcion of escena.opciones) {
@@ -2157,7 +2157,7 @@ function mostrarEscenaBatalla(id) {
         `;
       }
 
-      // Asignamos los eventos DESPUÉS de crear todos los botones.
+      // Se asignan los eventos DESPUÉS de crear todos los botones.
       //
       // Cada opción recuerda su destino:
       // otra escena o la salida a la Pokédex.
@@ -2174,17 +2174,17 @@ function mostrarEscenaBatalla(id) {
         );
       }
 
-      // Llevamos el foco al título nuevo para facilitar
+      // Se lleva el foco al título nuevo para facilitar
       // el seguimiento de las escenas usando el teclado.
       document.querySelector("#titulo-batalla").focus();
 
-      // Ya encontramos y mostramos la escena.
-      // Terminamos la función para no seguir recorriendo.
+      // Ya se encuentra y se muestra la escena.
+      // Se termina la función para no seguir recorriendo.
       return;
     }
   }
 
-  // Si se indicó un ID inexistente, volvemos a la presentación.
+  // Si se indicó un ID inexistente, se vuelve a la presentación.
   mostrarBatalla();
 }
 
@@ -2233,13 +2233,13 @@ linkJuego.addEventListener("click", function (event) {
 linkSalir.addEventListener("click", function (event) {
   event.preventDefault();
 
-  // Borramos el ID de sesión.
+  // Se borra el ID de sesión.
   cerrarSesion();
 
-  // Adaptamos el menú al estado de visitante.
+  // Se adapta el menú al estado de visitante.
   actualizarMenu();
 
-  // Volvemos a la bienvenida.
+  // Se vuelve a la bienvenida.
   mostrarBienvenida();
 });
 
@@ -2248,7 +2248,7 @@ linkSalir.addEventListener("click", function (event) {
 // ==========================================================
 
 // Después de definir las funciones y conectar los eventos,
-// ejecutamos estas llamadas para mostrar la primera pantalla.
+// se ejecutan estas llamadas para mostrar la primera pantalla.
 //
 // Si hay una sesión guardada, la bienvenida abre el perfil.
 // Si no hay sesión, muestra el inicio general.
