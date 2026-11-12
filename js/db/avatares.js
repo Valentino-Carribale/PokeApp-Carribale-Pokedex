@@ -1,4 +1,3 @@
-// Avatares disponibles en assets/avatar.
 export const avatares = [
   "acerola",
   "akane",
