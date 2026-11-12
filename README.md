@@ -22,6 +22,11 @@ Se puede ingresar por nombre de usuario o por correo.
 
 Los nuevos registros siempre tienen `admin: false`. El permiso no se puede cambiar desde el perfil, solo desde DB.
 
+## Testeo y Colaboración
+Intercambiamos páginas con Agustín Bianchi [(su PokeApp)](https://agusbianchi-ui.github.io/Tp9-PokeApp-AgustinBianchi/) para verificar las funcionalidades y sugerir algún cambio estético/funcional, validamos que las ideas de cada uno funcionaran y si algo fallaba.
+
+- En mi caso particular, tenía un problema con la reproducción de sonidos, tanto los predeterminados como si se cargaba un nuevo Pokemon, así que me sirvió para arreglarlo y hacer la entrega final.
+
 ## Funcionalidades
 
 - Inicio de sesión con usuario o correo y contraseña.
