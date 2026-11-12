@@ -167,7 +167,7 @@ function mostrarDetalle(id, mensaje) {
     document.querySelector("#detail-actions").innerHTML = `<audio controls preload="none" src="${texto(pokemon.sonido)}" aria-label="Sonido de ${texto(pokemon.nombre)}"></audio>`;
   }
   if (pokemon.shiny && pokemon.imagenShiny !== "") {
-    document.querySelector("#detail-actions").innerHTML += '<button id="ver-shiny" class="btn-secondary">Ver shiny</button>';
+    document.querySelector("#detail-actions").insertAdjacentHTML("beforeend", '<button id="ver-shiny" class="btn-secondary">Ver shiny</button>');
     let mostrandoShiny = false;
     document.querySelector("#ver-shiny").addEventListener("click", function () {
       mostrandoShiny = !mostrandoShiny;
