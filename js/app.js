@@ -16,7 +16,6 @@ const linkSalir = document.querySelector("#link-salir");
 const linkJuego = document.querySelector("#link-juego");
 const tipos = ["Normal", "Fuego", "Agua", "Planta", "Eléctrico", "Hielo", "Lucha", "Veneno", "Tierra", "Volador", "Psíquico", "Bicho", "Roca", "Fantasma", "Dragón", "Siniestro", "Acero", "Hada"];
 
-// El texto ingresado en formularios se muestra como texto, sin interpretar HTML.
 function texto(valor) {
   return String(valor).replace(/&/g, "&amp;").replace(/</g, "&lt;")
     .replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
@@ -265,7 +264,6 @@ function activarAvatar(valor) {
   });
 }
 
-// Ignora el mismo ID al editar, pero no permite repetir el correo o usuario ajenos.
 function usuarioDuplicado(email, username, id) {
   for (let usuario of leerUsuarios()) {
     if (usuario.id !== id && (usuario.email.toLowerCase() === email.toLowerCase() || usuario.username.toLowerCase() === username.toLowerCase())) {
@@ -488,7 +486,6 @@ function opcionesTipo() {
   return opciones;
 }
 
-// Un único formulario sirve para la carga y para la edición.
 function mostrarFormularioPokemon(idOriginal) {
   if (!esAdmin()) {
     mostrarBienvenida();
@@ -669,27 +666,14 @@ function guardarFormularioPokemon(idOriginal) {
   mostrarDetalle(nuevoPokemon.id, mensaje);
 }
 
-// ==========================================================
-// BATALLA: ESCENAS Y DECISIONES, COMO EN AURORA
-// ==========================================================
-
-// Entrar desde el menú siempre muestra la presentación.
 function mostrarBatalla() {
   cambiarPantalla("Batalla", linkJuego);
   mostrarEscenaBatalla("inicio");
 }
 
-// Recibe el ID de una escena y busca su objeto en game.js.
 function mostrarEscenaBatalla(id) {
   for (let escena of escenasBatalla) {
     if (escena.id === id) {
-      // Primero creamos la pantalla.
-      //
-      // Dejamos espacios vacíos para insertar después
-      // los párrafos y las opciones de esta escena.
-      //
-      // escena.tipo permite aplicar estilos distintos
-      // a la presentación, las decisiones y los finales.
       app.innerHTML = `
         <section class="batalla-section battle-screen battle-${escena.tipo}">
           <div class="battle-heading">
@@ -757,15 +741,12 @@ function mostrarEscenaBatalla(id) {
         </section>
       `;
 
-      // Recorremos los textos de la escena y agregamos
-      // un párrafo por cada elemento del array.
       const narracion = document.querySelector("#texto-batalla");
 
       for (let parrafo of escena.textos) {
         narracion.innerHTML += `<p>${parrafo}</p>`;
       }
 
-      // Creamos un botón por cada opción disponible.
       const opciones = document.querySelector("#opciones-batalla");
 
       for (let opcion of escena.opciones) {
@@ -780,10 +761,6 @@ function mostrarEscenaBatalla(id) {
         `;
       }
 
-      // Asignamos los eventos DESPUÉS de crear todos los botones.
-      //
-      // Cada opción recuerda su destino:
-      // otra escena o la salida a la Pokédex.
       for (let opcion of escena.opciones) {
         document.querySelector("#" + opcion.id).addEventListener(
           "click",
@@ -797,17 +774,12 @@ function mostrarEscenaBatalla(id) {
         );
       }
 
-      // Llevamos el foco al título nuevo para facilitar
-      // el seguimiento de las escenas usando el teclado.
       document.querySelector("#titulo-batalla").focus();
-
-      // Ya encontramos y mostramos la escena.
-      // Terminamos la función para no seguir recorriendo.
+      
       return;
     }
   }
 
-  // Si se indicó un ID inexistente, volvemos a la presentación.
   mostrarBatalla();
 }
 
